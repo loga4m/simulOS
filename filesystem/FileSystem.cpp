@@ -58,7 +58,6 @@ int FileSystemObject::remove()
 		return -1;
 	}
 
-
 	parent->removeChildObject(this);
 	delete this;
 	return 0;
@@ -114,9 +113,10 @@ DirectoryObject::~DirectoryObject()
 
 
 DirectoryObject* DirectoryObject::create(
-		std::string name,
-		DirectoryObject* parent,
-		std::string created_at)
+	std::string name,
+	DirectoryObject* parent,
+	std::string created_at
+)
 {
 	return new DirectoryObject(name, parent, created_at);
 }
@@ -166,20 +166,19 @@ FileObject::FileObject(
 		std::string inp_name,
 		DirectoryObject* inp_parent,
 		std::string inp_created_at
-		)
+	)
 	: FileSystemObject(
-			inp_name, inp_parent,
-			inp_created_at, false)
+		inp_name, inp_parent,
+		inp_created_at, false)
 {}
 
 
 FileObject::~FileObject() = default;
 
 FileObject* FileObject::create(
-		std::string name,
-		DirectoryObject* parent,
-		std::string created_at
-	)
+	std::string name,
+	DirectoryObject* parent,
+	std::string created_at)
 {
 	return new FileObject(name, parent, created_at);
 }

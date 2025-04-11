@@ -18,7 +18,7 @@ public:
 	
 	FileSystem();
 	~FileSystem();
-
+	
 	DirectoryObject* getRootDir();
 
 };
@@ -75,21 +75,23 @@ public:
 	
 	~DirectoryObject() override;
 
-	static DirectoryObject* create(std::string name,
+	static DirectoryObject* create(
+		std::string name,
 		DirectoryObject* parent,
 		std::string created_at
 	);
 	
-
 	int addChildObject(FileSystemObject* childObject);
 	int removeChildObject(FileSystemObject* childObject);
 	int displayContent() const override;
+
 };
 
 
 class FileObject : public FileSystemObject
 {
 private:
+
 	std::string content {""};
 	FileObject(
 		std::string inp_name,
@@ -101,11 +103,11 @@ public:
 	
 	~FileObject() override;
 
-	static FileObject* create(std::string name, 
-		DirectoryObject* parent, 
+	static FileObject* create(
+		std::string name,
+		DirectoryObject* parent,
 		std::string created_at
 	);
-
 
 	int rewrite(std::string new_content);
 	int addWrite(std::string new_content);
