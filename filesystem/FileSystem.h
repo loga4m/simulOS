@@ -11,7 +11,7 @@ class FileObject;
 class FileSystem
 {
 private:
-
+	
 	DirectoryObject* root_dir {nullptr};
 
 public:
@@ -32,7 +32,7 @@ protected:
 	std::string created_at {""};
 	std::string updated_at {""};
 	bool is_dir;
-    FileSystemObject(
+	FileSystemObject(
 		std::string inp_name,
 		DirectoryObject* inp_parent,
 		std::string inp_created_at,
@@ -41,13 +41,12 @@ protected:
 
 public:
 	
-	
 	virtual ~FileSystemObject();
 	int remove();	
-	
+
 	std::string getName() const;
 	DirectoryObject* getParent() const;
-	
+
 	// string getPath();
 	std::string getCreatedDate() const;
 	std::string getUpdatedDate() const;
@@ -64,19 +63,22 @@ public:
 class DirectoryObject : public FileSystemObject
 {
 private:
+	
 	std::vector<FileSystemObject*> childObjects {};
 	DirectoryObject(
 		std::string inp_name,
 		DirectoryObject* inp_parent,	
-		std::string inp_created_at);
+		std::string inp_created_at
+	);
 
 public:
 	
 	~DirectoryObject() override;
 
-	static DirectoryObject* create(std::string name, 
-		DirectoryObject* parent, 
-		std::string created_at);
+	static DirectoryObject* create(std::string name,
+		DirectoryObject* parent,
+		std::string created_at
+	);
 	
 
 	int addChildObject(FileSystemObject* childObject);
@@ -92,7 +94,8 @@ private:
 	FileObject(
 		std::string inp_name,
 		DirectoryObject* inp_parent,
-		std::string inp_created_at);
+		std::string inp_created_at
+	);
 
 public:
 	
@@ -100,7 +103,8 @@ public:
 
 	static FileObject* create(std::string name, 
 		DirectoryObject* parent, 
-		std::string created_at);
+		std::string created_at
+	);
 
 
 	int rewrite(std::string new_content);
