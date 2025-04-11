@@ -18,42 +18,33 @@ public:
 	
 	FileSystem();
 	~FileSystem();
-	
-	FileObject* createFile(
-			std::string name, 
-			DirectoryObject* parent, 
-			std::string create_at, 
-			bool is_dir);
-	DirectoryObject* createDirectory(
-			std::string name, 
-			DirectoryObject* parent, 
-			std::string created_at, 
-			bool is_dir);
+
 	DirectoryObject* getRootDir();
 
 };
 
 class FileSystemObject
 {
-private:
+protected:
 
 	std::string name {""};
 	DirectoryObject* parent {nullptr};
 	std::string created_at {""};
 	std::string updated_at {""};
 	bool is_dir;
-
-public:
-	
-	FileSystemObject(
+    FileSystemObject(
 		std::string inp_name,
 		DirectoryObject* inp_parent,
 		std::string inp_created_at,
 		bool inp_is_dir
 	);
+
+public:
 	
-	~FileSystemObject();
+	
+	virtual ~FileSystemObject();
 	int remove();	
+	
 	std::string getName() const;
 	DirectoryObject* getParent() const;
 	
@@ -64,7 +55,7 @@ public:
 	int changeUpdatedDate(std::string new_date);
 	int rename(std::string new_name);
 	bool isDir() const;
-	virtual int displayContent() const;
+	virtual int displayContent() const = 0;
 	int displayInfo() const;
 
 };
@@ -74,17 +65,19 @@ class DirectoryObject : public FileSystemObject
 {
 private:
 	std::vector<FileSystemObject*> childObjects {};
-
-public:
-	
 	DirectoryObject(
 		std::string inp_name,
 		DirectoryObject* inp_parent,	
-		std::string inp_created_at,
-		bool inp_is_dir
-	);
+		std::string inp_created_at);
+
+public:
 	
-	~DirectoryObject();
+	~DirectoryObject() override;
+
+	static DirectoryObject* create(std::string name, 
+		DirectoryObject* parent, 
+		std::string created_at);
+	
 
 	int addChildObject(FileSystemObject* childObject);
 	int removeChildObject(FileSystemObject* childObject);
@@ -96,14 +89,19 @@ class FileObject : public FileSystemObject
 {
 private:
 	std::string content {""};
-
-public:
 	FileObject(
 		std::string inp_name,
 		DirectoryObject* inp_parent,
-		std::string inp_created_at,
-		bool inp_is_dir);
-	~FileObject();
+		std::string inp_created_at);
+
+public:
+	
+	~FileObject() override;
+
+	static FileObject* create(std::string name, 
+		DirectoryObject* parent, 
+		std::string created_at);
+
 
 	int rewrite(std::string new_content);
 	int addWrite(std::string new_content);
