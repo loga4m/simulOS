@@ -22,6 +22,36 @@ FileSystem::~FileSystem()
 DirectoryObject* FileSystem::getRootDir(){ return root_dir; }
 
 
+/*
+*  	A function to buidl string path for a FileSystem Object.
+*	@returns string path
+*/
+std::string FileSystem::pathBuilder(FileSystemObject* fsystemObject) const
+{
+	if (fsystemObject->getParent() == nullptr)
+	{
+		return "/";
+	}
+
+	std::string path = "";
+	FileSystemObject* head = fsystemObject; // for bottom-up traversal
+	
+	while (head->getParent())
+	{
+		path = "/" + head->getName() + path;
+		head = head->getParent();
+	}
+
+	return path;
+}
+
+
+// FileSystemObject* FileSystem::objectLocator(DirectoryObject* current_dir, std::string path) const
+// {
+	
+// }
+
+
 // =============================== //
 // FileSystemObject implementation //
 // =============================== //
@@ -82,6 +112,11 @@ int FileSystemObject::changeUpdatedDate(std::string new_date)
 
 int FileSystemObject::rename(std::string new_name)
 {
+	if (parent == nullptr)
+	{
+		std::cout << "Cannot rename the root directory. Forbidden." << std::endl;
+		return -1;
+	}
 	name = new_name;
 	return 0;
 }
@@ -226,9 +261,20 @@ int FileObject::displayContent() const
 // 	// file1->remove();
 // 	root_dir->displayContent();
 // 	dir1->displayContent();
-// 	dir1->remove();
+// 	// dir1->remove();
 // 	root_dir->displayContent();
-// 	// file1->displayContent();
+// 	file1->displayContent();
+
+// 	std::cout << fsys.pathBuilder(file1) << std::endl;
+// 	root_dir->rename("Dangerous");
+// 	file1->rename("milkyway");
+// 	dir1->rename("galacticon");
+// 	root_dir->displayContent();
+// 	dir1->displayContent();
+// 	file1->displayContent();
+// 	std::cout << fsys.pathBuilder(file1) << std::endl;
+// 	std::cout << fsys.pathBuilder(dir1) << std::endl;
+// 	std::cout << fsys.pathBuilder(root_dir) << std::endl;
 // 	return 0;
 // }
 

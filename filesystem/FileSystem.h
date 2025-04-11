@@ -20,6 +20,8 @@ public:
 	~FileSystem();
 	
 	DirectoryObject* getRootDir();
+	std::string pathBuilder(FileSystemObject* fsystemObject) const;
+	FileSystemObject* objectLocator(DirectoryObject* current_dir, std::string path) const;
 
 };
 
