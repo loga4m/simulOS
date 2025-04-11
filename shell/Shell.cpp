@@ -3,6 +3,7 @@
 #include "Shell.h"
 #include <iostream>
 
+
 Shell::Shell(FileSystem* inp_filesystem)
 	: filesystem{ inp_filesystem }
 {
@@ -14,6 +15,7 @@ Shell::~Shell()
 {
 	delete cmd_handler;
 }
+
 
 int Shell::startSession()
 {

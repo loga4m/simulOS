@@ -1,13 +1,12 @@
 #include "CMDunit.h"
 #include "../filesystem/FileSystem.h"
 #include "../shell/Shell.h"
-
+#include <iostream>
 #include <string>
 #include <unordered_map>
 
 
 std::unordered_map<std::string, Command*> main_cmd_mapper = {
-        "cd": CDCommand
 };
 
 
@@ -16,7 +15,9 @@ CommandHandler::CommandHandler(
 		)
 	: shell{ inp_shell }
 	, cmd_mapper{ main_cmd_mapper }
-{}
+{
+	std::cout << "Hello from CommandHandler!" << std::endl;
+}
 
 int CommandHandler::parse()
 {

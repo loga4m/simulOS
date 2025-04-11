@@ -1,8 +1,12 @@
 #ifndef SHELL_H
 #define SHELL_H
-#include "../filesystem/FileSystem.h"
-#include "../cmdunit/CMDunit.h"
 #include <string>
+
+
+class FileSystem;
+class CommandHandler;
+class Command;
+
 
 class Shell
 {
