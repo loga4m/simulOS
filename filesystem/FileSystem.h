@@ -20,10 +20,15 @@ public:
 	~FileSystem();
 	
 	DirectoryObject* getRootDir();
-	std::string pathBuilder(FileSystemObject* fsystemObject) const;
-	FileSystemObject* objectLocator(DirectoryObject* current_dir, std::string path) const;
+	
+	
 
 };
+
+std::string pathBuilder(FileSystemObject* fsystemObject);
+FileSystemObject* objectLocator(DirectoryObject* root_dir, DirectoryObject* current_dir, std::string path);
+void FileSystemError(std::string err_message);
+
 
 class FileSystemObject
 {
@@ -49,7 +54,7 @@ public:
 	std::string getName() const;
 	DirectoryObject* getParent() const;
 
-	// string getPath();
+	std::string getPath();
 	std::string getCreatedDate() const;
 	std::string getUpdatedDate() const;
 
@@ -85,6 +90,7 @@ public:
 	
 	int addChildObject(FileSystemObject* childObject);
 	int removeChildObject(FileSystemObject* childObject);
+	FileSystemObject* findChild(std::string name);
 	int displayContent() const override;
 
 };
