@@ -20,29 +20,34 @@ public:
 	~FileSystem();
 	
 	DirectoryObject* getRootDir();
-	
-	
 
 };
 
 std::string pathBuilder(FileSystemObject* fsystemObject);
-FileSystemObject* objectLocator(DirectoryObject* root_dir, DirectoryObject* current_dir, std::string path);
+FileSystemObject* objectLocator(
+	DirectoryObject* root_dir, 
+	DirectoryObject* current_dir, 
+	std::string path
+);
+std::string getCurrentTime();
 void FileSystemError(std::string err_message);
 
 
 class FileSystemObject
 {
-protected:
+private:
 
 	std::string name {""};
 	DirectoryObject* parent {nullptr};
 	std::string created_at {""};
 	std::string updated_at {""};
 	bool is_dir;
+
+protected: 
+	// ^-- as the constructor should be accessible in derived classes
 	FileSystemObject(
 		std::string inp_name,
 		DirectoryObject* inp_parent,
-		std::string inp_created_at,
 		bool inp_is_dir
 	);
 
@@ -55,14 +60,14 @@ public:
 	DirectoryObject* getParent() const;
 
 	std::string getPath();
-	std::string getCreatedDate() const;
-	std::string getUpdatedDate() const;
+	std::string getCreatedTime() const;
+	std::string getUpdatedTime() const;
 
-	int changeUpdatedDate(std::string new_date);
+	int changeUpdatedTime();
 	int rename(std::string new_name);
 	bool isDir() const;
 	virtual int displayContent() const = 0;
-	int displayInfo() const;
+	int displayInfo();
 
 };
 
@@ -74,8 +79,7 @@ private:
 	std::vector<FileSystemObject*> childObjects {};
 	DirectoryObject(
 		std::string inp_name,
-		DirectoryObject* inp_parent,	
-		std::string inp_created_at
+		DirectoryObject* inp_parent
 	);
 
 public:
@@ -84,8 +88,7 @@ public:
 
 	static DirectoryObject* create(
 		std::string name,
-		DirectoryObject* parent,
-		std::string created_at
+		DirectoryObject* parent
 	);
 	
 	int addChildObject(FileSystemObject* childObject);
@@ -103,8 +106,7 @@ private:
 	std::string content {""};
 	FileObject(
 		std::string inp_name,
-		DirectoryObject* inp_parent,
-		std::string inp_created_at
+		DirectoryObject* inp_parent
 	);
 
 public:
@@ -113,8 +115,7 @@ public:
 
 	static FileObject* create(
 		std::string name,
-		DirectoryObject* parent,
-		std::string created_at
+		DirectoryObject* parent
 	);
 
 	int rewrite(std::string new_content);
