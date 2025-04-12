@@ -47,11 +47,11 @@ int main()
 	dir2->displayInfo();
 	file2->displayInfo();
 
-	FileSystemObject* finds = objectLocator(root_dir, dir1, "/adadadas/asdasdasd");
+	FileSystemObject* finds = objectLocator(root_dir, dir1, "/../adadadas/asdasdasd");
 	std::cout << (finds==nullptr) << std::endl;
 
 
-	finds = objectLocator(root_dir, dir2, file2->getPath());
+	finds = objectLocator(root_dir, dir2, file2->getPath() + "/dir");
 	if (finds)	
 	{
 		std::cout << (finds->getName()) << std::endl;
