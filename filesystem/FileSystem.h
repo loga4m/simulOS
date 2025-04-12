@@ -50,7 +50,8 @@ protected:
 		DirectoryObject* inp_parent,
 		bool inp_is_dir
 	);
-
+	static bool nameValidator(std::string name);
+	// ^-- for name validation
 public:
 	
 	virtual ~FileSystemObject();

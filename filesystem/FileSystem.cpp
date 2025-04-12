@@ -1,4 +1,5 @@
 #include <iostream>
+#include <set>
 #include <ctime>
 #include "FileSystem.h"
 
@@ -32,7 +33,7 @@ std::string pathBuilder(FileSystemObject* fsystemObject)
 {
 	if (fsystemObject == nullptr)
 	{
-		FileSystemError("Invalid object.");
+		FileSystemError("Invalid FileSystemObject.");
 		return "(invalid)";
 	}
 	if (fsystemObject->getParent() == nullptr)
@@ -68,7 +69,7 @@ FileSystemObject* objectLocator(
 	{
 		return root_dir;
 	}
-	std::string err_message = "Not Found.";
+	std::string err_message = "Not Found";
 
 	
 	FileSystemObject* mover = nullptr; // Initiliazing mover for further use
@@ -228,6 +229,25 @@ FileSystemObject::FileSystemObject(
 };
 
 
+bool FileSystemObject::nameValidator(std::string name)
+{
+	std::set<char> disallowedCharacters = {
+		'@', '#', '^', '%', '$', '&', '*',
+		'(', ')', '=', '!', '~', '\\', '/',
+		'|', '.', ',', '?', '[', ']', ';', 
+		':', '`', '"', '\''
+	};
+	if (!name.length())
+	{ return false; }
+	for (int index = 0; index < name.length(); index++)
+	{
+		if (disallowedCharacters.count(name.at(index)))
+		{ return false; }
+	}
+	return true;
+}
+
+
 /*
 *   Member function to self-remove an object.
 *   Developers are forced to create objects using new via factory methods.
@@ -287,6 +307,12 @@ int FileSystemObject::rename(std::string new_name)
 		FileSystemError("Cannot rename the root directory. Forbidden.");
 		return -1;
 	}
+	if (!nameValidator(new_name))
+	{
+		FileSystemError("Invalid name for FileSystemObject.");
+		return -1;
+	}
+	
 	name = new_name;
 	changeUpdatedTime();
 
@@ -333,25 +359,30 @@ DirectoryObject::~DirectoryObject()
 	}
 }
 
+/*
+ *	WARNING: Do not abuse this factory method by
+ *	passing empty name and nullptr parent argument!
+ *	This has been only allowed for FileSystem constructor
+ *	to create the default root directory.
+ */
 
 DirectoryObject* DirectoryObject::create(
 	std::string name,
 	DirectoryObject* parent
 )
 {
-	if (name.length() && !parent)
+	if (nameValidator(name) && !parent)
 	{
-		FileSystemError("Invalid parent directory.");
+		FileSystemError("Invalid parent DirectoryObject.");
 		return nullptr;
 	}
-	else if (name.length() == 0 && parent)
+	else if (!nameValidator(name) && parent)
 	{
-		FileSystemError("Invalid name for directory.");
+		FileSystemError("Invalid name for DirectoryObject.");
 		return nullptr;
 	}
 	return new DirectoryObject(name, parent);
 }
-
 
 int DirectoryObject::addChildObject(FileSystemObject* newChildObject)
 {
@@ -427,24 +458,16 @@ FileObject::FileObject(
 
 FileObject::~FileObject() = default;
 
-
 FileObject* FileObject::create(
 	std::string name,
 	DirectoryObject* parent)
 {
-	if (name.length() && !parent)
+	if (nameValidator(name) && parent)
 	{
-		FileSystemError("Invalid parent directory.");
-		return nullptr;
+		return new FileObject(name, parent);
 	}
-	else if (name.length() == 0 && parent)
-	{
-		FileSystemError("Invalid name for file.");
-		return nullptr;
-	}
-	return new FileObject(name, parent);
+	return nullptr;
 }
-
 
 int FileObject::rewrite(std::string new_content)
 {

@@ -1,5 +1,21 @@
 # simulOS:: FileSystem | FileSystemObject | DirectoryObject | FileObject | Utility Functions
 
+## Special Notes
+
+### Design of FileSystemObjects
+In this design, assignning an extension for files is not allowed since the most intrinsic part, which a ".", is not allowed in naming. Instead, **DirectoryObject** and **FileObject** is differentiated using inherent getter **isDir()**.
+
+### FileSystemObject::remove()
+This function is used to self-remove by Directory and FilObject classes. The end result of using this function is that the object will be deleted. However, your pointer with to the deleted object will NOT be NULLIFIED. Thus, make sure to set your pointer to NULLPTR.
+
+### FileSystemObjects -- Factory Method ::create()
+Creating **FileSystemObject**s is only possible using **DirectoryObject::create()** or **FileObject::create()**. Using **FileSystemObject** of object creation is impossible since the class is **abstract**.
+This design has been chosen intentionally to enforce **dynamic memory allocation** which is a requirement for the proper work of **FileSystemObject::remove()** function.
+
+### DirectoryObject::create()
+This static factory method is used to ensure that DirectoryObject is created using dynamic memory allocation. Althoug it valides arguments for some cases, it DOES NOT check the case when name is empty and parent is nullptr. This is doen intentionally in the current design as it allows creating the root directory by FileSytem with empty name and nullptr parent. Therefore, MAKE SURE at least one of your arguments is valid in passing. Checking for validity of **parent** is recommended as **name** is validated **automatically** when **parent** is **valid**. 
+
+
 ## Classes
 
 ### FileSystem
@@ -27,6 +43,13 @@
     Calls: getCurrentTime() to initialize created_at member variable
     Does: if parent is existent, calls parent's addChildObject member function to bind itself to its parent
     WARNING: Do not pass nullptr for parent! This is only allowed for internal root directory set up
+
+# nameValidator(name: string) static bool
+    |
+    ---> validates names in creation and renaming
+    Does not permit dots and slashes in file names
+    You can find all disallowed characters in the implementation file
+    @returns true --> on success false --> if name fails to meet requreiements
 
 + ~FileSystemObject(): virtual --> deletes root_dir
 
