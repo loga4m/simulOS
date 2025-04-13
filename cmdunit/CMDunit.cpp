@@ -96,14 +96,16 @@ int CommandHandler::executeCommand(std::vector<std::string> command_vec)
 	{ return 0; }
 	
 	std::string key = command_vec.front();
-	command_vec.erase(command_vec.begin()); // remove command part
+	command_vec.erase(command_vec.begin()); 
+	// ^--- remove command part and keep only arguments
 
 	// Find matching command
 	Command* matching_command = CommandRegistry::getCommand(key);
 	if (!matching_command)
 	{
+		// print
 		CommandError(key);
-		return -1;
+		return -1; // exit with error code
 	}
 	int code = matching_command->operate(*shell, command_vec);
 	return code;

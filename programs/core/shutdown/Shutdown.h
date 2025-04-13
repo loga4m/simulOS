@@ -3,14 +3,15 @@
 
 #include <string>
 #include <vector>
+
+class Shell;
 #include "../../../cmdunit/CMDunit.h"
 
 class ShutdownCommand : public Command
 {
-private:
 public:
 	ShutdownCommand();
-	int operate(const Shell& shell, std::vector<std::string> command_vec) override;
+	int operate(const Shell& shell, std::vector<std::string> cmd_args) override;
 };
 
 

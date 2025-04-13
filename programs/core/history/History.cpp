@@ -12,16 +12,16 @@ HistoryCommand::HistoryCommand()
 };
 
 int HistoryCommand::operate(const Shell& shell,
-		std::vector<std::string> command_vec)
+		std::vector<std::string> cmd_args)
 {
 	HistoryApp* app = new HistoryApp();
-	int code = app->run(shell, command_vec);
+	int code = app->run(shell, cmd_args);
 	delete app;
 	app = nullptr;
 	return code;
 }
 
-int HistoryApp::run(const Shell& shell, std::vector<std::string> command_v)
+int HistoryApp::run(const Shell& shell, std::vector<std::string> args)
 {
 	std::cout << shell.getHistory() << std::endl;
 	return 0;

@@ -7,6 +7,6 @@
 int main()
 {
 	OS os{};
-	int x = os.start();
+	os.start();
 	return 0;
 }

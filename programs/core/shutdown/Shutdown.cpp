@@ -12,7 +12,7 @@ ShutdownCommand::ShutdownCommand()
 }
 
 int ShutdownCommand::operate(const Shell& shell,
-		std::vector<std::string> command_vec)
+		std::vector<std::string> cmd_args)
 {
 	return -2;
 }
