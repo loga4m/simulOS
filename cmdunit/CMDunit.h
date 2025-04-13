@@ -1,54 +1,59 @@
 #ifndef CMDUNIT_H
 #define CMDUNIT_H
-
 #include <string>
 #include <vector>
 #include <unordered_map>
 
+
 class FileSystem;
+class FileSystemObject;
+class DirectoryObject;
+class FileObject;
 class Shell;
 class Command;
+
 
 class CommandHandler
 {
 private:
-
-	Shell* shell {nullptr};
-	std::unordered_map<std::string, Command*> cmd_mapper = {}; 
-	// ^-- Command is a pointer
-
+	Shell* shell { nullptr };
 public:
-
+	
 	CommandHandler(Shell* inp_shell);
-	int parse();
-	int execute();
-	// int execMessage [ optional ]
-};
+	~CommandHandler();
 
+	int processCommand(std::string user_input);
+	std::vector<std::string> parseCommand(const std::string& user_input);
+	int executeCommand(std::vector<std::string> user_input_vec);
+};
 
 class Command
 {
 protected:
-	
-	std::string cmd_key {""};
-	int arg_num {1};
+	std::string key {""};
+	int arg_num {};
 	std::string description {""};
-	Shell* shell {nullptr};
-
 public:
-	
-	Command(
-		Shell* inp_shell,
-		std::string inp_cmd_key, 
-		int inp_arg_num, 
-		std::string inp_description
-	);
-
-	std::string getDescription() { return description; }
-	std::string getCMDkey() { return cmd_key; }
-	int getArgNum() { return arg_num; }
-	virtual int operate(std::vector<std::string> args) = 0;
+	Command(std::string inp_key, int inp_arg_num, std::string inp_description);
+	std::string getKey() const;
+	int getArgNum() const;
+	std::string getDescription() const;
+	virtual int operate(const Shell& shell, std::vector<std::string> command_vec) = 0;
 };
+
+class CommandRegistry
+{
+private:
+	static std::unordered_map<std::string, Command*> commandMap;
+public:
+	static bool registerCommand(std::string key, Command*);
+	static Command* getCommand(std::string key);
+	static bool hasCommand(std::string key);
+	
+	static std::vector<std::string> getAllCommandNames;
+};
+
+void CommandError(const std::string& err_message);
 
 #endif
 

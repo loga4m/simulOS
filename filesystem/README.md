@@ -44,7 +44,7 @@ This static factory method is used to ensure that DirectoryObject is created usi
     Does: if parent is existent, calls parent's addChildObject member function to bind itself to its parent
     WARNING: Do not pass nullptr for parent! This is only allowed for internal root directory set up
 
-# nameValidator(name: string) static bool
+# nameValidator(name: const string&) static bool
     |
     ---> validates names in creation and renaming
     Does not permit dots and slashes in file names
@@ -209,7 +209,7 @@ objectLocator(
 
 ### FileSystemError
 ```
-FileSystemError(string: err_message): void
+FileSystemError(err_message: const string&): void
     |
     ---> a helper function to print customized error messages
     STDCERR: FileSystemError: {err_message} 

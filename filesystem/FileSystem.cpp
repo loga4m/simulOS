@@ -12,13 +12,13 @@
 FileSystem::FileSystem()
 {
 	root_dir = DirectoryObject::create("", nullptr);
-	std::cout << "Root directory created" << std::endl;
 }
 
 
 FileSystem::~FileSystem()
 {
 	delete root_dir;
+	root_dir = nullptr;
 }
 DirectoryObject* FileSystem::getRootDir(){ return root_dir; }
 
@@ -203,7 +203,7 @@ std::string getCurrentTime()
 }
 
 
-void FileSystemError(std::string err_message)
+void FileSystemError(const std::string& err_message)
 {
 	std::cerr << "FileSystemError: " << err_message << std::endl;
 }
@@ -229,7 +229,7 @@ FileSystemObject::FileSystemObject(
 };
 
 
-bool FileSystemObject::nameValidator(std::string name)
+bool FileSystemObject::nameValidator(const std::string& name)
 {
 	std::set<char> disallowedCharacters = {
 		'@', '#', '^', '%', '$', '&', '*',
@@ -355,6 +355,7 @@ DirectoryObject::~DirectoryObject()
 {
 	for (FileSystemObject* childObject: childObjects)
 	{
+		this->removeChildObject(childObject);
 		delete childObject;
 	}
 }

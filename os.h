@@ -1,12 +1,13 @@
 #ifndef OS_H
 #define OS_H
-#include "filesystem/FileSystem.h"
-#include "shell/Shell.h"
+
+class FileSystem;
+class Shell;
 
 class OS
 {
 private:
-	FileSystem* filesystem{ nullptr };
+	FileSystem* fsystem{ nullptr };
 	Shell* shell{ nullptr };
 public:
 	OS();

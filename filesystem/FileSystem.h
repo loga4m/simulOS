@@ -30,7 +30,7 @@ FileSystemObject* objectLocator(
 	std::string path
 );
 std::string getCurrentTime();
-void FileSystemError(std::string err_message);
+void FileSystemError(const std::string& err_message);
 
 
 class FileSystemObject
@@ -50,7 +50,7 @@ protected:
 		DirectoryObject* inp_parent,
 		bool inp_is_dir
 	);
-	static bool nameValidator(std::string name);
+	static bool nameValidator(const std::string& name);
 	// ^-- for name validation
 public:
 	
@@ -77,7 +77,6 @@ class DirectoryObject : public FileSystemObject
 {
 private:
 	
-	std::vector<FileSystemObject*> childObjects {};
 	DirectoryObject(
 		std::string inp_name,
 		DirectoryObject* inp_parent
@@ -85,6 +84,7 @@ private:
 
 public:
 	
+	std::vector<FileSystemObject*> childObjects {};
 	~DirectoryObject() override;
 
 	static DirectoryObject* create(
