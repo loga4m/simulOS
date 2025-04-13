@@ -12,7 +12,7 @@ class HistoryCommand : public Command
 {
 public:
 	HistoryCommand();
-	int operate(const Shell& shell, std::vector<std::string> args) override;
+	int operate(Shell& shell, std::vector<std::string> args) override;
 };
 
 class HistoryApp

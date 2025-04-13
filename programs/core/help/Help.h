@@ -11,7 +11,7 @@ class HelpCommand : public Command
 {
 public:
 	HelpCommand();
-	int operate(const Shell& shell, std::vector<std::string> cmd_args) override;
+	int operate(Shell& shell, std::vector<std::string> cmd_args) override;
 };
 
 class HelpProgram

@@ -11,7 +11,7 @@ ShutdownCommand::ShutdownCommand()
 	CommandRegistry::registerCommand("exit", this);
 }
 
-int ShutdownCommand::operate(const Shell& shell,
+int ShutdownCommand::operate(Shell& shell,
 		std::vector<std::string> cmd_args)
 {
 	return -2;

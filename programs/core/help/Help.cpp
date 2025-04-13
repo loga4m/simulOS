@@ -11,7 +11,7 @@ HelpCommand::HelpCommand()
 	CommandRegistry::registerCommand("help", this);
 }
 
-int HelpCommand::operate(const Shell& shell, std::vector<std::string> cmd_args)
+int HelpCommand::operate(Shell& shell, std::vector<std::string> cmd_args)
 {
 	HelpProgram* program = new HelpProgram();
 	int code = program->run(shell, cmd_args);

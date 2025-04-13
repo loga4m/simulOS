@@ -11,7 +11,7 @@ HistoryCommand::HistoryCommand()
 	static bool registered = CommandRegistry::registerCommand("history", this);
 };
 
-int HistoryCommand::operate(const Shell& shell,
+int HistoryCommand::operate(Shell& shell,
 		std::vector<std::string> cmd_args)
 {
 	HistoryApp* app = new HistoryApp();

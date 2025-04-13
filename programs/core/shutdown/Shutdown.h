@@ -11,7 +11,7 @@ class ShutdownCommand : public Command
 {
 public:
 	ShutdownCommand();
-	int operate(const Shell& shell, std::vector<std::string> cmd_args) override;
+	int operate(Shell& shell, std::vector<std::string> cmd_args) override;
 };
 
 
