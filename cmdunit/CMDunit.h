@@ -38,7 +38,7 @@ public:
 	std::string getKey() const;
 	int getArgNum() const;
 	std::string getDescription() const;
-	virtual int operate(const Shell& shell, std::vector<std::string> command_vec) = 0;
+	virtual int operate(const Shell& shell, std::vector<std::string> cmd_args) = 0;
 };
 
 class CommandRegistry

@@ -1,5 +1,6 @@
 #ifndef HISTORY_H
 #define HISTORY_H
+
 #include <vector>
 #include <string>
 #include "../../../cmdunit/CMDunit.h"
