@@ -26,7 +26,7 @@ public:
 	DirectoryObject* getRootDir() const;
 	DirectoryObject* getCurrentDir() const;
 	std::string getHistory() const;
-	int setCurrentDir(DirectoryObject* new_dir);
+	int changeCurrentDir(DirectoryObject* new_dir);
 };
 
 

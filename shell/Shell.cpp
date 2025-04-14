@@ -66,7 +66,7 @@ DirectoryObject* Shell::getCurrentDir() const
 std::string Shell::getHistory() const
 { return history->read(); }
 
-int Shell::setCurrentDir(DirectoryObject* new_dir)
+int Shell::changeCurrentDir(DirectoryObject* new_dir)
 {
 	if (!new_dir) { return -1; }
 	current_dir = new_dir;

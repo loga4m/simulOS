@@ -7,8 +7,8 @@ When an intance of OS is created, it calls its start function which calls Shell:
 After it, before the main function stops, OS calls its deconstructor which first deletes the Shell instance (this order is safe) followed by the removal of the FileSystem instance.
 
 ```
-- fsystem: FileSystem
-- shell: Shell
+- fsystem: FileSystem*
+- shell: Shell*
 + OS();
     ^---- Creates **fsystem** and assignes it to **shell** during its creation 
 + ~OS();
