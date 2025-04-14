@@ -2,7 +2,7 @@
 #include "./filesystem/FileSystem.h"
 #include "./cmdunit/CMDunit.h"
 #include "./shell/Shell.h"
-#include "os.h"
+#include "./os/os.h"
 
 int main()
 {

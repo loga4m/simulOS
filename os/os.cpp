@@ -3,8 +3,8 @@
 #include <vector>
 #include <chrono>
 #include <thread> // chrono and this are used for waiting
-#include "./filesystem/FileSystem.h"
-#include "./shell/Shell.h"
+#include "../filesystem/FileSystem.h"
+#include "../shell/Shell.h"
 #include <vector>
 #include "os.h"
 

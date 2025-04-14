@@ -39,8 +39,8 @@ int HelpProgram::run(const Shell& shell, std::vector<std::string> cmd_args)
 		Command* cmd = CommandRegistry::getCommand(arg);
 		if (!cmd)
 		{
-			if (cmd_args.front() != arg 
-					&& CommandRegistry::hasCommand(
+			if (arg_index != 0 && 
+					CommandRegistry::hasCommand(
 						cmd_args.at(arg_index - 1)
 					)
 			) // for printing \n in a smart way
