@@ -1,5 +1,7 @@
 # simulOS | Writing your plug-in-able programs
 
+<br>
+
 Before moving to part of creating your own programs, it is useful to remember about the CMDunit, or thecommand unit, asa whole.
 Here is a little diagram for user input flow:
 
@@ -13,10 +15,16 @@ Shell => listening to commands => user types => enter =>
 => if no match, return -1 => otherwise, get the matching command and call =>
 => matching_command->operate()[look down] => Your Program -> OKAY .
 ```
-|______==> CAUTION: Pass Shell and command_args (not thecommand!) to operate, it is MANDATORY   
+
 <br>
 
-#### Now, how does the system recognize your command?
+CAUTION: Pass Shell and command_args (not thecommand!) to operate, it is MANDATORY   
+
+<br>
+
+## Now, how does the system recognize your command?
+
+<br>
 
 As you've noticed above, there is a class called CommandRegistry which manages command registration.
 
@@ -26,6 +34,8 @@ The **static** is important here. In the context of the abovementioned variable,
 
 In the context of functions, the **static** allows us to access those functions **without** the **CommandRegistry** class ***instane***.
 
+<br>
+
 To sum up all the points, CommandRegistry mainly
 1. Provides commandMap variable to load commands before the main
 2. Provides registerCommand() that enables registering commands
@@ -33,7 +43,9 @@ To sum up all the points, CommandRegistry mainly
 
 <br>
 
-#### But, what is the command here about which the whole point talked?
+## But, what is the command here about which the whole point talked?
+
+<br>
 
 This is the most essential part. Your programs are **essentially commands** as a user accesses them with commands. Commands mainly have their keyword, acceptable argument numbers, and description. This pattern repeats in every program you create.
 
@@ -63,15 +75,30 @@ After you write your program command and the program itself, you should create a
 <br>
 
 ## Before moving to the template for writing your program, here are some recommendations:
-#### 1. Categorization
+
+<br>
+
+### 1. Categorization
 Logically categorize your program to either **core** or **usr** (look below for the difference).
 Create a new directory in the chosen category. For example, for **history** program, choose /core and create History directory here.
-#### 2. Separate the implementation and header files. Never mix them!
-#### 3. Including other units 
+
+<br>
+
+### 2. Separate the implementation and header files. Never mix them!
+
+<br>
+
+### 3. Including other units 
 In the header file, try to avoid including header files of other units like **FileSystem**, **Shell**, etc. As Shell's name is used, you can ***forward-declare*** at the top of your header file. However, you **must** include ***"CMDunit.h"***  header file.
-#### 4. Program command and Program Logic
-If your pogram logic is small, you can do all the things in the ***overriden*** **operate** function. Otherwise, separate the program logic to another class. For example, **MyProgramNameAppClass**. Then, create an instance of your class inside t**operate** and call functions that run your program. ***This way you learly separate your program command from the program logic implementation.***
-#### 5. Obey to the return codes. **Make sure that *operate* returns integer status code**.
+
+<br>
+
+### 4. Program command and Program Logic
+If your pogram logic is small, you can do all the things in the ***overriden*** **operate** function. Otherwise, separate the program logic to another class. For example, **MyProgramNameAppClass**. Then, create an instance of your class inside t**operate** and call functions that run your program. ***This way you clearly separate your program command from the program logic implementation.***
+
+<br>
+
+### 5. Obey to the return codes. **Make sure that *operate* returns integer status code**.
 *The difference between core and usr is that core programs do operations specifically targeted to the system. In contrary, usr applications include utilities, text-editors (they can be included to core as well), games, etc.
 
 <br>
@@ -119,7 +146,7 @@ That's all for the theory, now it is time to implementation.
 
 <br>
 
-##### Header file
+### Header file
 ```
     #ifndef YOUR_PROGRAM_H // use guards, please!
     #define YOUR_PROGRAM_H
@@ -152,7 +179,7 @@ That's all for the theory, now it is time to implementation.
     #endif
 ```
 
-##### Implementation file
+### Implementation file
 
 ```
     // standard library includes, they are high in hierarchy (very independent)
@@ -190,24 +217,21 @@ That's all for the theory, now it is time to implementation.
     // Congrats! Now it should self-register and work!
 
 ```
+
 *Include hierarchy is the order of includes by their level of dependence on each other. The higher the order, the more independent is the module.
-Standard Library modules are totally independent from our programs. They are included first.
+Standard Library modules are totally independent from our programs. They are included first.*
+
+<br>
+
 As to our own:
-FileSystem.h -- the most independent
-CMDunit.h
-Shell.h
+- FileSystem.h -- the most independent
+- CMDunit.h
+- Shell.h
+
+<br>
 
 #### Important: Make sure your source (implementation) file is included to compilation! If you're using the Makefile of this project, just run make!
 
 <br>
 
 By Oyatillo Axadjonov
-
-
-
-
-
-
-
-
-
