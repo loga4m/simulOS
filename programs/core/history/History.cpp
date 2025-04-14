@@ -5,6 +5,14 @@
 #include "../../../cmdunit/CMDunit.h"
 #include "../../../shell/Shell.h"
 
+
+/*
+ *
+ *   Author: Oyatillo Axadjonov
+ *
+ * */
+
+
 HistoryCommand::HistoryCommand()
 	: Command("history", 0, "Print the history of commands")
 {

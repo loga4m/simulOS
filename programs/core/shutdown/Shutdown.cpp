@@ -4,6 +4,14 @@
 #include "../../../shell/Shell.h"
 #include "Shutdown.h"
 
+
+/*
+ *
+ *   Author: Oyatillo Axadjonov
+ *
+ * */
+
+
 ShutdownCommand::ShutdownCommand()
 	: Command("shutdown", 0, "Shuts the system down.")
 {

@@ -5,6 +5,14 @@
 #include "../../../cmdunit/CMDunit.h"
 #include "../../../shell/Shell.h"
 
+
+/*
+ *
+ *   Author: Oyatillo Axadjonov
+ *
+ * */
+
+
 HelpCommand::HelpCommand()
 	: Command{ "help", -1, "A program that fetches information about specified commands" }
 {
