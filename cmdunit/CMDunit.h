@@ -46,11 +46,11 @@ class CommandRegistry
 private:
 	static std::unordered_map<std::string, Command*> commandMap;
 public:
-	static bool registerCommand(std::string key, Command*);
+	static bool registerCommand(std::string key, Command* cmd);
 	static Command* getCommand(std::string key);
 	static bool hasCommand(std::string key);
 	
-	static std::vector<std::string> getAllCommandNames;
+	static std::vector<std::string> getAllCommandNames();
 };
 
 void CommandError(const std::string& err_message);

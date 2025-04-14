@@ -6,6 +6,7 @@ class DirectoryObject;
 class FileObject;
 class CommandHandler;
 class Command;
+class CommandRegistry;
 
 class Shell
 {

@@ -32,6 +32,18 @@ bool CommandRegistry::hasCommand(std::string key)
 	return commandMap.find(key) != commandMap.end();
 }
 
+std::vector<std::string> CommandRegistry::getAllCommandNames()
+{
+	std::vector<std::string> cmd_names = {};
+
+	for (auto key_value: commandMap)
+	{
+		cmd_names.push_back(key_value.first);
+	}
+
+	return cmd_names;
+}
+
 CommandHandler::CommandHandler(Shell* inp_shell)
 	: shell{ inp_shell }
 {}
