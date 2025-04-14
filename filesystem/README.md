@@ -5,16 +5,24 @@
 ### Design of FileSystemObjects
 In this design, assignning an extension for files is not allowed since the most intrinsic part, which a ".", is not allowed in naming. Instead, **DirectoryObject** and **FileObject** is differentiated using inherent getter **isDir()**.
 
+<br>
+
 ### FileSystemObject::remove()
 This function is used to self-remove by Directory and FilObject classes. The end result of using this function is that the object will be deleted. However, your pointer with to the deleted object will NOT be NULLIFIED. Thus, make sure to set your pointer to NULLPTR.
+
+<br>
 
 ### FileSystemObjects -- Factory Method ::create()
 Creating **FileSystemObject**s is only possible using **DirectoryObject::create()** or **FileObject::create()**. Using **FileSystemObject** of object creation is impossible since the class is **abstract**.
 This design has been chosen intentionally to enforce **dynamic memory allocation** which is a requirement for the proper work of **FileSystemObject::remove()** function.
 
+<br>
+
 ### DirectoryObject::create()
 This static factory method is used to ensure that DirectoryObject is created using dynamic memory allocation. Althoug it valides arguments for some cases, it DOES NOT check the case when name is empty and parent is nullptr. This is doen intentionally in the current design as it allows creating the root directory by FileSytem with empty name and nullptr parent. Therefore, MAKE SURE at least one of your arguments is valid in passing. Checking for validity of **parent** is recommended as **name** is validated **automatically** when **parent** is **valid**. 
 
+<br>
+<br>
 
 ## Classes
 
@@ -26,6 +34,7 @@ This static factory method is used to ensure that DirectoryObject is created usi
 + getRootDir()
 ```
 
+<br>
 
 ### FileSystemObject Abstract Class
 ```
@@ -79,6 +88,7 @@ This static factory method is used to ensure that DirectoryObject is created usi
     @returns 0 --> success
 ```
 
+<br>
 
 ### DirectoryObject Class : public FileSystemObject
 ```
@@ -121,6 +131,7 @@ This static factory method is used to ensure that DirectoryObject is created usi
     @returns 0 --> success
 ```
 
+<br>
 
 ### FileObject : public FileSystemObject
 ```
@@ -156,6 +167,9 @@ This static factory method is used to ensure that DirectoryObject is created usi
     @returns 0 --> success
 ```
 
+<br>
+<br>
+
 ## Utility Functions
 
 ### pathBuilder
@@ -168,6 +182,8 @@ pathBuilder(fsystemObject: FileSystemObject*): string
     @returns path if everything is successful
 ```
 
+<br>
+
 ### getCurrentTime
 ```
 getCurrentTime(): string
@@ -175,6 +191,8 @@ getCurrentTime(): string
     ---> uses standard library to return current time in format "year/month/day hours:min:sec"
     @returns string
 ```
+
+<br>
 
 ### objectLocator
 ```
@@ -207,6 +225,8 @@ objectLocator(
             example path: ../ -- this is forbidden
 ```
 
+<br>
+
 ### FileSystemError
 ```
 FileSystemError(err_message: const string&): void
@@ -215,5 +235,7 @@ FileSystemError(err_message: const string&): void
     STDCERR: FileSystemError: {err_message} 
     @returns void
 ```
+
+<br>
 
 **Author:** Oyatillo Axadjonov

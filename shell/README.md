@@ -1,7 +1,11 @@
 # simulOS | Shell
 
+<br>
+
 Shell unit of the program mainly serves to initiate an interactive session for users.
 As it is passed to the **Command** interface which enables adding new programs unrelated to the core system, Shell also functions as a medium to give access to FileSystem resources by those programs.
+
+<br>
 
 ### Shell
 ```
@@ -20,3 +24,5 @@ As it is passed to the **Command** interface which enables adding new programs u
 + getHistory(): const string
 + changeCurrentDir(): DirectoryObject*
 ```
+
+<br>
