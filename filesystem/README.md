@@ -107,9 +107,9 @@ This static factory method is used to ensure that DirectoryObject is created usi
     ---> removes passed childObject, if it exists, from childObjects
     @returns 0 --> success
 
-+ findChild(name: string): FileSystemObject* 
++ getChild(name: string): FileSystemObject* 
     |
-    ---> tries to find a childObject by the given name
+    ---> returns a child object; in case it fails, returns **nullptr**
     Warning: If you want to use specific attributes (member functions or variables) 
              of either DirectoryObject or FileObject, you have to typecast current object
              to them. It is allowed.

@@ -69,7 +69,7 @@ FileSystemObject* objectLocator(
 	{
 		return root_dir;
 	}
-	std::string err_message = "Not Found";
+	std::string err_message = "FileSystemObject not found.";
 
 	
 	FileSystemObject* mover = nullptr; // Initiliazing mover for further use
@@ -145,7 +145,7 @@ FileSystemObject* objectLocator(
 				continue;
 			}
 
-			FileSystemObject* searchResult = static_cast<DirectoryObject*>(mover)->findChild(path_part);
+			FileSystemObject* searchResult = static_cast<DirectoryObject*>(mover)->getChild(path_part);
 			/*	
 				If no cases above are handled, it is time to check the current subpath whether
 				it is in the mover drectory. If a path is correct, then there is a solution.
@@ -413,7 +413,7 @@ int DirectoryObject::removeChildObject(FileSystemObject* childObject)
 }
 
 
-FileSystemObject* DirectoryObject::findChild(std::string name)
+FileSystemObject* DirectoryObject::getChild(std::string name)
 {
 	for (FileSystemObject* childObject: childObjects)
 	{

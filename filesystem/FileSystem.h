@@ -94,7 +94,7 @@ public:
 	
 	int addChildObject(FileSystemObject* childObject);
 	int removeChildObject(FileSystemObject* childObject);
-	FileSystemObject* findChild(std::string name);
+	FileSystemObject* getChild(std::string name);
 	int displayContent() const override;
 
 };
