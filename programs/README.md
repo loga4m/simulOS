@@ -5,7 +5,7 @@
 Before moving to part of creating your own programs, it is useful to remember about the CMDunit, or thecommand unit, asa whole.
 Here is a little diagram for user input flow:
 
-```
+```bash
 Shell => listening to commands => user types => enter => 
 => Shell accepts => Pass the user input to CommandHandler::processCommand =>
 => call CommandHandler::parseCommand() to seprate the command and arguments =>
@@ -135,7 +135,7 @@ That's all for the theory, now it is time to implementation.
 ### Here is an example with a template
 *Note that this is done for a program enough large to have a separate class.
 
-```
+```bash
     cd programs // go to programs
     cd core //  go to core
     mkdir YourProgramName // create the directory of your program
@@ -147,7 +147,7 @@ That's all for the theory, now it is time to implementation.
 <br>
 
 ### Header file
-```
+```cpp
     #ifndef YOUR_PROGRAM_H // use guards, please!
     #define YOUR_PROGRAM_H
 
@@ -181,7 +181,7 @@ That's all for the theory, now it is time to implementation.
 
 ### Implementation file
 
-```
+```cpp
     // standard library includes, they are high in hierarchy (very independent)
     // You can include FileSystem.h too, if you need
 
@@ -234,4 +234,4 @@ As to our own:
 
 <br>
 
-By Oyatillo Axadjonov
+**Author**: Oyatillo Axadjonov

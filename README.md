@@ -8,7 +8,7 @@ Namely, they are shell, filesystem, command handling unit, and core/user-defined
 <br>
 
 ## Running the program
-```
+```bash
     git clone https://github.com/oyatillonewuu/simulOS
     cd simulOS
     make // if you have it on your system

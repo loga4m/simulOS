@@ -8,7 +8,7 @@ As it is passed to the **Command** interface which enables adding new programs u
 <br>
 
 ### Shell
-```
+```bash
 - name: string
 - fsystem: FileSystem*
 - cmdHandler: CommandHandler*

@@ -27,7 +27,7 @@ This static factory method is used to ensure that DirectoryObject is created usi
 ## Classes
 
 ### FileSystem
-```
+```bash
 - root_dir: DirectoryObject*
 + FileSystem()
 + ~FileSystem()
@@ -37,7 +37,7 @@ This static factory method is used to ensure that DirectoryObject is created usi
 <br>
 
 ### FileSystemObject Abstract Class
-```
+```bash
 - name: string
 - parent: DirectoryObject*
 - created_at: string
@@ -91,7 +91,7 @@ This static factory method is used to ensure that DirectoryObject is created usi
 <br>
 
 ### DirectoryObject Class : public FileSystemObject
-```
+```bash
 - childObjects: vector of FileSystemObject*
 - DirectoryObject(
         name: string,
@@ -134,7 +134,7 @@ This static factory method is used to ensure that DirectoryObject is created usi
 <br>
 
 ### FileObject : public FileSystemObject
-```
+```bash
 - content: string
 - FileObject(
         name: string,
@@ -173,7 +173,7 @@ This static factory method is used to ensure that DirectoryObject is created usi
 ## Utility Functions
 
 ### pathBuilder
-```
+```bash
 pathBuilder(fsystemObject: FileSystemObject*): string
     |
     ---> given a valid object, this function builds path in string type and returns it
@@ -185,7 +185,7 @@ pathBuilder(fsystemObject: FileSystemObject*): string
 <br>
 
 ### getCurrentTime
-```
+```bash
 getCurrentTime(): string
     |
     ---> uses standard library to return current time in format "year/month/day hours:min:sec"
@@ -195,7 +195,7 @@ getCurrentTime(): string
 <br>
 
 ### objectLocator
-```
+```bash
 objectLocator(
         root_dir: DirectoryObject*,
         current_dir: DirectoryObject*,
@@ -228,7 +228,7 @@ objectLocator(
 <br>
 
 ### FileSystemError
-```
+```bash
 FileSystemError(err_message: const string&): void
     |
     ---> a helper function to print customized error messages

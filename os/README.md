@@ -10,7 +10,7 @@ After it, before the main function stops, OS calls its deconstructor which first
 
 <br>
 
-```
+```bash
 - fsystem: FileSystem*
 - shell: Shell*
 + OS();

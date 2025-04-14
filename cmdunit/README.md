@@ -7,7 +7,7 @@
 <br>
 
 ### CommandHandler
-```
+```bash
 - shell: Shell*
 
 + CommandHandler(inp_shell: Shell*)
