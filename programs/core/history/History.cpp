@@ -8,7 +8,7 @@
 HistoryCommand::HistoryCommand()
 	: Command("history", 0, "Print the history of commands")
 {
-	static bool registered = CommandRegistry::registerCommand("history", this);
+	CommandRegistry::registerCommand("history", this);
 };
 
 int HistoryCommand::operate(Shell& shell,

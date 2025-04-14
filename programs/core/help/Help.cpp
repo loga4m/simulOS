@@ -33,44 +33,60 @@ int HelpProgram::run(const Shell& shell, std::vector<std::string> cmd_args)
 	const int descrp_word_len = description_display_word.length();
 
 
-	for (std::string arg: cmd_args)
+	for (int arg_index = 0; arg_index < cmd_args.size(); arg_index++)
 	{
-		std::cout << std::endl;
+		std::string arg = cmd_args.at(arg_index); // get string
 		Command* cmd = CommandRegistry::getCommand(arg);
 		if (!cmd)
 		{
+			if (cmd_args.front() != arg 
+					&& CommandRegistry::hasCommand(
+						cmd_args.at(arg_index - 1)
+					)
+			) // for printing \n in a smart way
+			{ std::cout << std::endl; }
 			std::cout << "help: Command '" << arg << "' not found." << std::endl;
 			continue;
 		}
 		
+		std::cout << std::endl;
 		std::cout << "help:";
 		
 		int diff_without_word = (CHAR_PER_LINE - cmd->getKey().length());
 		
 		printCharNTimes(diff_without_word / 2, '_');
-		std::cout << cmd->getKey();
+		
+		/*-------------------*/ std::cout << cmd->getKey(); /*-------------------*/ 
+		// ^--- these comments demonstrate the role of 
+		// printCharNTimes call which is filling for centering.
+
 		printCharNTimes(diff_without_word / 2, '_');
 		std::cout << std::endl; 
 
-		printCharNTimes(TAB_LEN, ' ');
-		std::cout << "Number of allowed arguments (-1 : means any): " << cmd->getArgNum() << std::endl;
+		printCharNTimes(TAB_LEN, ' '); // print TAB
+		std::cout <<  args_display_words<< cmd->getArgNum() << std::endl;
 		std::cout << std::endl;
 
-		printCharNTimes(TAB_LEN, ' ');
-			
+		printCharNTimes(TAB_LEN, ' '); // print TAB
 		diff_without_word = (CHAR_PER_LINE -  descrp_word_len); 
 		
-		printCharNTimes(diff_without_word / 2, '_');
-		std::cout << description_display_word;	
-		printCharNTimes(diff_without_word / 2, '_');
+		printCharNTimes(diff_without_word / 2 - 3, ' ');
+		
+		/*-------------------*/ std::cout << "## " << description_display_word << " ##"; /*-------------------*/ 	
+		// ^--- these comments demonstrate the role of 
+		// printCharNTimes call which is filling for centering.
+		
+		printCharNTimes(diff_without_word / 2 - 3, ' ');
 		std::cout << std::endl;
 
 		std::string description = cmd->getDescription();
 
-		printCharNTimes(TAB_LEN, ' '); // initial TAB
+		printCharNTimes(TAB_LEN, ' '); // print TAB as (index % CHAR_PER_LINE) == 0 
+					       // condition does not hold for index = 0 
+					       // which does not meet the need to print TAB
 		for (int index = 0; index < description.length(); index++)
 		{
-			if ((index % CHAR_PER_LINE) == 0)
+			if ((index + 1) % CHAR_PER_LINE == 0) // if it index is the last line of fit
 			{ 
 				std::cout << std::endl;
 				printCharNTimes(TAB_LEN, ' ');
@@ -79,7 +95,8 @@ int HelpProgram::run(const Shell& shell, std::vector<std::string> cmd_args)
 		}
 		std::cout << std::endl;
 	}
-	std::cout << std::endl;
+	if (CommandRegistry::hasCommand(cmd_args.back()))
+	{ std::cout << std::endl; }
 	return 0;
 }
 
