@@ -28,7 +28,7 @@ public:
         DirectoryObject* current_dir = shell.getCurrentDir();
 
         FileSystemObject* dir_to_remove = current_dir->getChild(dir_name);
-        if (!dir_to_remove) {
+        if (!dir_to_remove || !dir_to_remove->isDir()) {
             std::cout << "Error: Directory not found." << std::endl;
             return -1;
         }

@@ -26,6 +26,13 @@
         	if (!ch_dir) {
 			return -1; 
 		}
+
+		if (!ch_dir->isDir())
+		{
+			std::cout << "cd: Not a DirectoryObject." << std::endl;
+			return -1;
+		}
+
 		shell.changeCurrentDir(static_cast<DirectoryObject*>(ch_dir));
 		return 0;
 	}

@@ -65,9 +65,12 @@ FileSystemObject* objectLocator(
 	std::string path
 )
 {
-	if (path == "/" || path.length() == 0)
+	if (path == "/")
 	{
 		return root_dir;
+	} else if (path.length() == 0)
+	{
+		return current_dir;
 	}
 	std::string err_message = "FileSystemObject not found.";
 
@@ -103,11 +106,10 @@ FileSystemObject* objectLocator(
 	{
 		// If mover becomes a FileObject from the prev. iteration, then immediately break
 		if (!mover->isDir())
-		{ break; }
+		{std::cout<<"yeah!\n"; break; }
 		
 		if (path.at(index) == '/')
 		{
-			
 			// '..' is a command to go one step out in the hierarchy
 			if (path_part == "..")
 			{
@@ -167,7 +169,7 @@ FileSystemObject* objectLocator(
 	}
 
 	/*	
-		If the loops stops and index has not reached length yet,
+		If the loop stops and index has not reached length yet,
 		that means there is no solution.
 		Index is exactly equal to length at the end because 
 		everytime the subpath is found, index is incremented.
@@ -353,10 +355,20 @@ DirectoryObject::DirectoryObject(
 
 DirectoryObject::~DirectoryObject()
 {
-	for (FileSystemObject* childObject: childObjects)
+	for (int childObjIndex = 0; childObjIndex < childObjects.size(); childObjIndex++)
 	{
-		this->removeChildObject(childObject);
-		delete childObject;
+		/*
+		 *    
+		 *    This is a place where dark things happened (Apr 15, 11:48 PM)
+		 *    leading to Segmentaion Fault.
+		 *
+		 *    Lesson: When iterating a container object,
+		 *    do not change its content that changes its size!
+		 *    This can result in a behavior you don't expect.
+		 *
+		 * */	
+		delete childObjects.at(childObjIndex);
+		childObjects.at(childObjIndex) = nullptr;
 	}
 }
 
@@ -473,13 +485,16 @@ FileObject* FileObject::create(
 int FileObject::rewrite(std::string new_content)
 {
 	content = new_content;
+	changeUpdatedTime();
 	return 0;
 }
 
 
 int FileObject::addWrite(std::string new_content)
 {
+	
 	content += new_content;
+	changeUpdatedTime();
 	return 0;
 }
 

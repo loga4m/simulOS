@@ -23,9 +23,9 @@ public:
 
     std::string dir_name = cmd_args.front();
     DirectoryObject* current_dir = shell.getCurrentDir();
-
-    if (current_dir->getChild(dir_name)) {
-      std::cout << "Error: Directory already exists." << std::endl;
+    FileSystemObject* look_up_obj = current_dir->getChild(dir_name);
+    if (look_up_obj) {
+      std::cout << "Error: FileSystemObject with this name already exists." << std::endl;
       return -1;
     }
 

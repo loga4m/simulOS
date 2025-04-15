@@ -28,9 +28,10 @@ public:
 		}
 		std::string file_name = cmd_args.front(); // Chotkiy
 		DirectoryObject* current_dir = shell.getCurrentDir();
-        
-		if (current_dir->getChild(file_name)) {
-			std::cout << "Error: File already exists." << std::endl;
+
+		FileSystemObject* look_up_obj = current_dir->getChild(file_name);
+		if (look_up_obj) {
+			std::cout << "Error: FileSystemObject with this name already exists." << std::endl;
 			return -1;
 		}
 

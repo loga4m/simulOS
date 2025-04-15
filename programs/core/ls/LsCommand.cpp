@@ -28,7 +28,7 @@ int LsApp::run(const Shell& shell, std::vector<std::string> command_v)
     DirectoryObject* current_dir = shell.getCurrentDir();
     DirectoryObject* root_dir = shell.getRootDir();
     
-    if (command_v.size() != 1)
+    if (command_v.size() != 1 && command_v.size() != 0)
     {
 	std::cout << "Bad argument(s). Enter valid path." << std::endl;
 	return -1;
@@ -36,8 +36,9 @@ int LsApp::run(const Shell& shell, std::vector<std::string> command_v)
 
     // Handle path argument if provided
     //
-    std::string path = command_v.front();
-    
+    std::string path = "";
+    if (command_v.size() != 0) { path = command_v.front(); }
+   
     // Find the target directory
     FileSystemObject* target = objectLocator(root_dir, current_dir, path);
     
@@ -50,7 +51,6 @@ int LsApp::run(const Shell& shell, std::vector<std::string> command_v)
         return -1;
     }
     
-    std::cout << "Contents of " << target->getPath() << ":" << std::endl;
     return target->displayContent();
 }
 

@@ -30,7 +30,7 @@ public:
         DirectoryObject* current_dir = shell.getCurrentDir();
 
         FileSystemObject* file_to_remove = current_dir->getChild(file_name);
-        if (!file_to_remove) {
+        if (!file_to_remove || file_to_remove->isDir()) {
             std::cout << "Error: File not found." << std::endl;
             return -1;
         }

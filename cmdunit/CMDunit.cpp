@@ -97,7 +97,6 @@ std::vector<std::string> CommandHandler::parseCommand(const std::string& user_in
 	 *     end with empty space. This results in loop quitting
 	 *     due to the length condition without adding mover.
 	 */
-
 	return result;
 }
 
@@ -110,7 +109,7 @@ int CommandHandler::executeCommand(std::vector<std::string> command_vec)
 	std::string key = command_vec.front();
 	command_vec.erase(command_vec.begin()); 
 	// ^--- remove command part and keep only arguments
-
+	
 	// Find matching command
 	Command* matching_command = CommandRegistry::getCommand(key);
 	if (!matching_command)
