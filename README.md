@@ -1,3 +1,5 @@
+Presentation: https://www.canva.com/design/DAGkrKHzcKs/froC5-QBJP-iXRfVrSJyAw/edit?utm_content=DAGkrKHzcKs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
 # simulOS -- simulated Operating System
 
 ## Description
