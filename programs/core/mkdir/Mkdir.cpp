@@ -32,7 +32,6 @@ public:
     DirectoryObject* new_dir = DirectoryObject::create(dir_name, current_dir);
     if (new_dir) {
       std::cout << "Directory '" << dir_name << "' created." << std::endl;
-      current_dir->displayContent();
       return 0;
     }
     else {

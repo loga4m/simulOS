@@ -69,6 +69,7 @@ This static factory method is used to ensure that DirectoryObject is created usi
     WARNING: Don't forget to set your object to nullptr after removel; otherwise, it would lead to undefined behavior
 
 + getName(): const string
++ getParent(): string
 + getCreatedTime(): const string
 + getUpdatedTime(): const string
 

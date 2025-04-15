@@ -37,7 +37,6 @@ public:
 		FileObject* new_file = FileObject::create(file_name, current_dir);
 		if (new_file) {
 			std::cout << "FileSytem: File '" << file_name << "' created." << std::endl;
-			current_dir->displayContent();
 			return 0;
 		
 		}
