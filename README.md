@@ -1,5 +1,7 @@
 Presentation: https://www.canva.com/design/DAGkrKHzcKs/froC5-QBJP-iXRfVrSJyAw/edit?utm_content=DAGkrKHzcKs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
+Figma: https://www.figma.com/board/e5hzNqFsrM5f2DCvCflzD0
+
 # simulOS -- simulated Operating System
 
 ## Description
