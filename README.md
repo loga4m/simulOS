@@ -62,6 +62,8 @@ All main system operations use integer-based code to indicate different errors. 
     -2 -- shutdown/exit system/Shell signal
 ```
 
+<br>
+
 ## Limitations
 
 **Limitation #1**: To add meaning to errors, some error handlers directly print their error message to **STDOUT** alongside their integer status code. However, this design comes with a tradeoff that these operations cannot return messages to callers that may potentially use these messages.
