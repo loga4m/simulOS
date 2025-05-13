@@ -4,6 +4,7 @@
 This is a program that tries to simulate Linux operating system by imitating several features.
 Namely, they are shell, filesystem, command handling unit, and core/user-defined programs.
 
+<br>
 
 ## Running the program
 ```bash
@@ -15,7 +16,6 @@ Namely, they are shell, filesystem, command handling unit, and core/user-defined
 If you don't have **make** utility on your system, run the program typically and ensure that all source (\***.cpp**) files are compiled. 
 
 <br>
-<br>
 
 ## System components & workflow
 Except programs part, all parts are defined as classes, with not mentioned OS class aggregating them. They are organized in a directories resembling modules.
@@ -23,24 +23,19 @@ Except programs part, all parts are defined as classes, with not mentioned OS cl
 OS class serves to instantiate FileSytem and Shell.
 
 <br>
-<br>
 
 ## Shell
 **Shell** is a class/sub-program that allows a user to interact with the system, and run core/usr(user-defined) programs. As user writes a command and hits the enter, Shell implicitly redirects the control to **CommandHandler** class of command unit. 
 
-<br>
 <br>
 
 ## Command Handling
 **CommandHandler** parses the user input and tries to match a command from the commands of existing programs. Any matching command found, it will execute it. The control is returned back to Shell.
 
 <br>
-<br>
 
 ## Extensibility feature
 **simulOS** has been designed to provide extensibility before compilation, if not on runtime. This means that others can include their programs with their corresponding commands. This design is made possible by creating an interface that makes core/user-defined program commands plug-in-able.
-
-<br>
 
 ### The Interface for Extending
 The interface, **Command**, is provided by the command unit. Beyond giving extensibility, it also provides an access to **FileSystem** resources by passing Shell which has the main FileSytem resources which are root directory and current directory.
@@ -55,15 +50,10 @@ After the program command and logic is implemented, the developer has to registe
 **FileSystem** class organizes files and directories and their management in the system. Files and directories are the same except for some differences like files have content while directories can have children. Also, currently, there is no support for file extensions and, thus, including **dots** and **slashes** is strictly disallowed. So the creation of files/directories violating the naming is automatically disregarded.
 
 <br>
-<br>
 
 ## Design
 
-<br>
-
 ### Operation Execution Success & Error Handling
-
-<br>
 
 All main system operations use integer-based code to indicate different errors. Here are primary ones:
 ```
@@ -72,7 +62,7 @@ All main system operations use integer-based code to indicate different errors. 
     -2 -- shutdown/exit system/Shell signal
 ```
 
-<br>
+## Limitations
 
 **Limitation #1**: To add meaning to errors, some error handlers directly print their error message to **STDOUT** alongside their integer status code. However, this design comes with a tradeoff that these operations cannot return messages to callers that may potentially use these messages.
 
