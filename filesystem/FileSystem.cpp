@@ -106,7 +106,7 @@ FileSystemObject* objectLocator(
 	{
 		// If mover becomes a FileObject from the prev. iteration, then immediately break
 		if (!mover->isDir())
-		{std::cout<<"yeah!\n"; break; }
+		{ break; }
 		
 		if (path.at(index) == '/')
 		{
