@@ -4,8 +4,6 @@
 This is a program that tries to simulate Linux operating system by imitating several features.
 Namely, they are shell, filesystem, command handling unit, and core/user-defined programs.
 
-<br>
-<br>
 
 ## Running the program
 ```bash
