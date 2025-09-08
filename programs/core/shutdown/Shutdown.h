@@ -7,20 +7,17 @@
 class Shell;
 #include "../../../cmdunit/CMDunit.h"
 
-
 /*
  *
  *   Author: Oyatillo Axadjonov
  *
  * */
 
-
 class ShutdownCommand : public Command
 {
-public:
-	ShutdownCommand();
-	int operate(Shell& shell, std::vector<std::string> cmd_args) override;
+  public:
+    ShutdownCommand();
+    int operate(Shell &shell, std::vector<std::string> cmd_args) override;
 };
-
 
 #endif

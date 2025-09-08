@@ -6,14 +6,15 @@ class Shell;
 
 class OS
 {
-private:
-	FileSystem* fsystem{ nullptr };
-	Shell* shell{ nullptr };
-public:
-	OS();
-	~OS();
-	int start();
-	int stop();
+  private:
+    FileSystem *fsystem{nullptr};
+    Shell *shell{nullptr};
+
+  public:
+    OS();
+    ~OS();
+    int start();
+    int stop();
 };
 
 #endif

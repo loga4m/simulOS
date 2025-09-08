@@ -3,8 +3,8 @@
 
 #include <string>
 #include <vector>
-#include "../../../cmdunit/CMDunit.h"
 
+#include "../../../cmdunit/CMDunit.h"
 
 /*
  *
@@ -12,20 +12,19 @@
  *
  * */
 
-
 class Shell;
 
 class HelpCommand : public Command
 {
-public:
-	HelpCommand();
-	int operate(Shell& shell, std::vector<std::string> cmd_args) override;
+  public:
+    HelpCommand();
+    int operate(Shell &shell, std::vector<std::string> cmd_args) override;
 };
 
 class HelpProgram
 {
-public:
-	int run(const Shell& shell, std::vector<std::string> cmd_args);	
+  public:
+    int run(const Shell &shell, std::vector<std::string> cmd_args);
 };
 
 void printCharNTimes(const int TAB_LEN, const char character);
