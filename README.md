@@ -1,5 +1,12 @@
 # simulOS -- simulated Operating System
 
+## Other READMEs
+- [FileSystem](./filesystem/README.md)
+- [Shell](./shell/README.md)
+- [Command Unit](./cmdunit/README.md)
+- [OS](./os/README.md)
+- [Programs](./programs/README.md)
+
 ## Description
 This is a program that tries to simulate Linux operating system by imitating several features.
 Namely, they are shell, filesystem, command handling unit, and core/user-defined programs.
@@ -66,31 +73,52 @@ All main system operations use integer-based code to indicate different errors. 
 
 ## Limitations
 
-**Limitation #1**: To add meaning to errors, some error handlers directly print their error message to **STDOUT** alongside their integer status code. However, this design comes with a tradeoff that these operations cannot return messages to callers that may potentially use these messages.
+- To add meaning to errors, some error handlers directly print their error message to **STDOUT** alongside their integer status code. However, this design comes with a tradeoff that these operations cannot return messages to callers that may potentially use these messages.
 
 <br>
 
-**Limitation #2**: As mentioned, there is no support for file extensions.
+- As mentioned, there is no support for file extensions.
 
 <br>
 
-**Limitation #3**: In FileSystem management, there is need to create Directories or Files. Due to another functionality which requires that these objects are **strictly dynamically allocated**, using *direct intializaton via* **constructor** is **strictly disallowed**. Any attempt to do so, the system will crash raising errors.
+- In FileSystem management, there is need to create Directories or Files. Due to another functionality which requires that these objects are **strictly dynamically allocated**, using *direct intializaton via* **constructor** is **strictly disallowed**. Any attempt to do so, the system will crash raising errors.
 Thus, to **enforce** dynamic memory allocation, factory methods inside DirectoryObject and FilObject classes have been implemented.
 
 <br>
 
-**Limitation #4**: This limitation is the self-removal of Directory or File objects. TO delete them, this function uses **delete** keyword which **requires** that the object to be deleted is of a **pointer** type. If a developer uses thefactory methods mentioned above, there should be no errors.
+- This limitation is the self-removal of Directory or File objects. TO delete them, this function uses **delete** keyword which **requires** that the object to be deleted is of a **pointer** type. If a developer uses thefactory methods mentioned above, there should be no errors.
 
 <br>
 
-**Limitation #5**: FileSystem and other parts of the system massively user pointers for their operation. Tere are cases where objects potentially can be used with references which are safer than pointers.
+- FileSystem and other parts of the system massively user pointers for their operation. Tere are cases where objects potentially can be used with references which are safer than pointers.
 
 <br>
 
-**Limitation #6**: When creating FileSystem objects, the system automatically assigns their creation time. The limitation is that **string** type is used for timekeeping. This also applicable for for function that assigns time of update of a particular file/directory.
+- When creating FileSystem objects, the system automatically assigns their creation time. The limitation is that **string** type is used for timekeeping. This also applicable for for function that assigns time of update of a particular file/directory.
 
 <br>
 
-**Limitation #7**: This limitation is that the system is just a simulator.
+- This limitation is that the system is just a simulator.
 
 <br>
+
+
+## Contributors
+- @loga4m, Oyatillo Axadjonov
+  - Core developer: filesystem, cmdunit, shell, os
+  - Author of "help", "clear", "info", etc. 
+- @hasan-mavlonov
+  - Improved Design proposal
+  - Author of change current dir functionality in core Shell
+  - 
+- @ElshodXushvaqtov
+  - Authored programs:
+    - rm, rmf
+    - touch, mkdir
+- @Azizogo
+  - Author of the "date" program
+- @sobirjonqadirov
+
+*Apologies for contributors as I may not have included all contributions correctly. Due to memory error.*
+
+**Special thanks**: To @hasan-mavlonov who brought the idea by @loga4m into the basis/near-form for the current design.

@@ -228,7 +228,6 @@ As to our own:
 - CMDunit.h
 - Shell.h
 
-<br>
 
 #### Important: Make sure your source (implementation) file is included to compilation! If you're using the Makefile of this project, just run make!
 

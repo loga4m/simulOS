@@ -56,6 +56,7 @@ CommandError(err_message: const string&): void
 
 <br>
 
+**Author**: Oyatillo Axadjonov
 
 
 

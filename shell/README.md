@@ -26,3 +26,5 @@ As it is passed to the **Command** interface which enables adding new programs u
 ```
 
 <br>
+
+**Author**: Oyatillo Axadjonov
