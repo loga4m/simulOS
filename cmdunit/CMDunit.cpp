@@ -118,9 +118,31 @@ int CommandHandler::executeCommand(std::vector<std::string> command_vec)
     if (!matching_command)
     {
         // print
-        CommandError(key);
+        CommandNotFoundError(key);
         return -1; // exit with error code
     }
+
+    // Check if argument number matches
+    int argsNumGiven = command_vec.size();
+    int expectedArgsNum = matching_command->getArgNum();
+    bool isMultiArgCommandCase = expectedArgsNum == -1 && argsNumGiven > 0;
+    // ^-- In this case, given args number is not equal to expected (since it is -1).
+    // Then, the command will be valid if given args num > 0 (at least one argument
+    // to multi-arg command).
+
+    if (argsNumGiven != expectedArgsNum && !(isMultiArgCommandCase)) {
+        std::string err_message = "Command '" + key + "' expects ";
+        std::string stringArgsNum = std::to_string(expectedArgsNum);
+
+        if (expectedArgsNum == -1) {
+            stringArgsNum = "at least one";
+        }
+        err_message += stringArgsNum + " arguments.";
+
+        CommandError(err_message);
+        return -1;
+    }
+
     int code = matching_command->operate(*shell, command_vec);
     return code;
 }
@@ -145,7 +167,12 @@ std::string Command::getDescription() const
     return description;
 }
 
-void CommandError(const std::string &cmd)
+void CommandError(const std::string &err_message)
 {
-    std::cout << "CommandUnitError: Command '" << cmd << "'" << " not found." << std::endl;
+    std::cout << "CommandUnitError: " << err_message << std::endl;
+}
+
+void CommandNotFoundError(const std::string &cmd) {
+    std::string error = "Command " + cmd + " not found.";
+    CommandError(error);
 }

@@ -20,12 +20,6 @@ ClearCommand::ClearCommand() : Command{"clear", 0, "A command to clear the scree
 
 int ClearCommand::operate(Shell &shell, std::vector<std::string> cmd_args)
 {
-    if (cmd_args.size() != 0)
-    {
-        CommandError("This command does not accept any arguments.");
-        return -1;
-    }
-
     // Learned from ChatGPT
     std::cout << "\033[?25l";                      // Hide cursor
     std::cout << "\033[2J\033[1;1H" << std::flush; // clears the screen

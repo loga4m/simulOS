@@ -174,7 +174,7 @@ That's all for the theory, now it is time to implementation.
         int run(// your args, if any); // example function; this is called by operate
         
         // do whatever you want
-    }
+    };
 
     #endif
 ```
@@ -184,7 +184,8 @@ That's all for the theory, now it is time to implementation.
 ```cpp
     // standard library includes, they are high in hierarchy (very independent)
     // You can include FileSystem.h too, if you need
-
+    
+    #include "./YourProgramHeader"
     #include "../../../cmdunit/CMDunit.h" // you MUST include it
     #include "../../../shell/Shell.h" // now, you can safely do so
     

@@ -24,7 +24,7 @@ class HelpCommand : public Command
 class HelpProgram
 {
   public:
-    int run(const Shell &shell, std::vector<std::string> cmd_args);
+    int run(std::vector<std::string> cmd_args);
 };
 
 void printCharNTimes(const int TAB_LEN, const char character);

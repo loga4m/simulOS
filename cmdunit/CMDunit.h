@@ -54,5 +54,6 @@ class CommandRegistry
 };
 
 void CommandError(const std::string &err_message);
+void CommandNotFoundError(const std::string &err_message);
 
 #endif

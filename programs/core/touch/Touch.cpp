@@ -24,11 +24,6 @@ class TouchCommand : public Command
 
     int operate(Shell &shell, std::vector<std::string> cmd_args) override
     {
-        if (cmd_args.size() != 1)
-        {
-            std::cout << "Error: Bad argument." << std::endl;
-            return -1;
-        }
         std::string file_name = cmd_args.front(); // Chotkiy
         DirectoryObject *current_dir = shell.getCurrentDir();
 

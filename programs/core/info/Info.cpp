@@ -16,12 +16,6 @@ class InfoCommand : public Command
 
     int operate(Shell &shell, std::vector<std::string> cmd_args) override
     {
-        if (cmd_args.size() != 1)
-        {
-            std::cout << "Bad argument(s). Enter a valid path." << std::endl;
-            return -1;
-        }
-
         FileSystemObject *object = objectLocator(shell.getRootDir(), shell.getCurrentDir(), cmd_args.front());
 
         if (!object)

@@ -23,12 +23,6 @@ class RmfCommand : public Command
 
     int operate(Shell &shell, std::vector<std::string> cmd_args) override
     {
-        if (cmd_args.size() != 1)
-        {
-            std::cout << "Error: Bad argument(s).." << std::endl;
-            return -1;
-        }
-
         std::string dir_name = cmd_args.front();
         DirectoryObject *current_dir = shell.getCurrentDir();
 

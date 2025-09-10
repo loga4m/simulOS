@@ -15,12 +15,6 @@ class CDcommand : public Command // inheritance
     }
     int operate(Shell &shell, std::vector<std::string> cmd_args)
     {
-        if (cmd_args.size() != 1)
-        {
-            std::cout << "Bar argument(s)." << std::endl;
-            return -1;
-        }
-
         std::string path = cmd_args.front();
         FileSystemObject *ch_dir = objectLocator(shell.getRootDir(), shell.getCurrentDir(), path);
 

@@ -13,34 +13,24 @@ LsCommand::LsCommand() : Command("ls", 1, "List directory contents")
     CommandRegistry::registerCommand("ls", this);
 };
 
-int LsCommand::operate(Shell &shell, std::vector<std::string> command_vec)
+int LsCommand::operate(Shell &shell, std::vector<std::string> cmd_args)
 {
     LsApp *app = new LsApp();
-    int code = app->run(shell, command_vec);
+    int code = app->run(shell, cmd_args);
     delete app;
     app = nullptr;
     return code;
 }
 
-int LsApp::run(const Shell &shell, std::vector<std::string> command_v)
+int LsApp::run(const Shell &shell, std::vector<std::string> cmd_args)
 {
     // Get current directory from shell (assuming shell has this capability)
     DirectoryObject *current_dir = shell.getCurrentDir();
     DirectoryObject *root_dir = shell.getRootDir();
 
-    if (command_v.size() != 1 && command_v.size() != 0)
-    {
-        std::cout << "Bad argument(s). Enter valid path." << std::endl;
-        return -1;
-    }
-
     // Handle path argument if provided
-    //
     std::string path = "";
-    if (command_v.size() != 0)
-    {
-        path = command_v.front();
-    }
+    path = cmd_args.front();
 
     // Find the target directory
     FileSystemObject *target = objectLocator(root_dir, current_dir, path);

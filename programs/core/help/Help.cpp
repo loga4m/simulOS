@@ -21,18 +21,14 @@ HelpCommand::HelpCommand() : Command{"help", -1, "A program that fetches informa
 int HelpCommand::operate(Shell &shell, std::vector<std::string> cmd_args)
 {
     HelpProgram *program = new HelpProgram();
-    int code = program->run(shell, cmd_args);
+    int code = program->run(cmd_args);
+    delete program;
+    program = nullptr;
     return code;
 }
 
-int HelpProgram::run(const Shell &shell, std::vector<std::string> cmd_args)
+int HelpProgram::run(std::vector<std::string> cmd_args)
 {
-    if (cmd_args.empty())
-    {
-        std::cout << "help: No arguments provided." << std::endl;
-        return -1;
-    }
-
     const int TAB_LEN = 5;
     const std::string args_display_words = "Number of allowed arguments (-1 : means any): ";
     const int CHAR_PER_LINE = args_display_words.length();
@@ -115,4 +111,4 @@ void printCharNTimes(const int N, const char character)
     }
 }
 
-static HelpCommand helpCommanInstance;
+static HelpCommand helpCommandInstance;

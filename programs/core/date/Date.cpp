@@ -22,11 +22,6 @@ class Date : public Command
     };
     int operate(Shell &shell, std::vector<std::string> cmd_args) override
     {
-        if (cmd_args.size() != 0)
-        {
-            std::cout << "date: Too many arguments" << std::endl;
-            return -1;
-        }
         std::cout << getCurrentTime() << std::endl;
         return 0;
     }

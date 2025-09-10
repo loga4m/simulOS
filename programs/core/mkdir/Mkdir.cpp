@@ -19,12 +19,6 @@ class MkdirCommand : public Command
 
     int operate(Shell &shell, std::vector<std::string> cmd_args) override
     {
-        if (cmd_args.size() != 1)
-        {
-            std::cout << "Error: Bad directory name." << std::endl;
-            return -1;
-        }
-
         std::string dir_name = cmd_args.front();
         DirectoryObject *current_dir = shell.getCurrentDir();
         FileSystemObject *look_up_obj = current_dir->getChild(dir_name);

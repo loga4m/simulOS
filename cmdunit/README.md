@@ -1,5 +1,8 @@
 # simulOS | CMDunit
 
+### Related docs:
+- [How to add your programs](../programs/README.md)
+
 <br>
 
 ## Classes

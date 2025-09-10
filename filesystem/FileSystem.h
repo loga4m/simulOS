@@ -37,8 +37,6 @@ class FileSystemObject
   protected:
     // ^-- as the constructor should be accessible in derived classes
     FileSystemObject(std::string inp_name, DirectoryObject *inp_parent, bool inp_is_dir);
-    static bool nameValidator(const std::string &name);
-    // ^-- for name validation
   public:
     virtual ~FileSystemObject();
     int remove();
