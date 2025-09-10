@@ -22,6 +22,8 @@ Namely, they are shell, filesystem, command handling unit, and core/user-defined
 ```
 If you don't have **make** utility on your system, run the program typically and ensure that all source (\***.cpp**) files are compiled. 
 
+Try `apps` command to get the list of available apps (commands).
+
 <br>
 
 ## System components & workflow
