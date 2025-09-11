@@ -35,10 +35,7 @@ std::string pathBuilder(FileSystemObject *fsystemObject)
         FileSystemError("Invalid FileSystemObject.");
         return "(invalid)";
     }
-    if (fsystemObject->getParent() == nullptr)
-    {
-        return "/";
-    }
+    if (fsystemObject->getParent() == nullptr) return "/";
 
     std::string path = "";
     FileSystemObject *head = fsystemObject; // for bottom-up traversal
@@ -50,23 +47,16 @@ std::string pathBuilder(FileSystemObject *fsystemObject)
     }
 
     if (fsystemObject->isDir())
-    {
         path += "/";
-    }
 
     return path;
 }
 
 FileSystemObject *objectLocator(DirectoryObject *root_dir, DirectoryObject *current_dir, std::string path)
 {
-    if (path == "/")
-    {
-        return root_dir;
-    }
-    else if (path.length() == 0)
-    {
-        return current_dir;
-    }
+    if (path == "/") return root_dir;
+    else if (path.length() == 0) return current_dir;
+
     std::string err_message = "FileSystemObject not found.";
 
     FileSystemObject *mover = nullptr; // Initiliazing mover for further use
@@ -101,10 +91,7 @@ FileSystemObject *objectLocator(DirectoryObject *root_dir, DirectoryObject *curr
     {
         // If mover becomes a FileObject from the prev. iteration, then immediately
         // break
-        if (!mover->isDir())
-        {
-            break;
-        }
+        if (!mover->isDir()) break;
 
         if (path.at(index) == '/')
         {
@@ -216,9 +203,7 @@ FileSystemObject::FileSystemObject(std::string inp_name, DirectoryObject *inp_pa
     : name{inp_name}, parent{inp_parent}, is_dir{inp_is_dir}, created_at{getCurrentTime()}
 {
     if (inp_parent)
-    {
         inp_parent->addChildObject(this);
-    }
 };
 
 /*
@@ -264,9 +249,8 @@ std::string FileSystemObject::getCreatedTime() const
 std::string FileSystemObject::getUpdatedTime() const
 {
     if (updated_at.length() == 0)
-    {
         return "(empty)";
-    }
+
     return updated_at;
 }
 
@@ -368,9 +352,7 @@ int DirectoryObject::addChildObject(FileSystemObject *newChildObject)
     for (FileSystemObject *childObject : childObjects)
     {
         if (childObject == newChildObject)
-        {
             return -1;
-        }
     }
     childObjects.push_back(newChildObject);
     return 0;
@@ -394,9 +376,7 @@ FileSystemObject *DirectoryObject::getChild(std::string name)
     for (FileSystemObject *childObject : childObjects)
     {
         if (childObject->getName() == name)
-        {
             return childObject;
-        }
     }
 
     return nullptr;

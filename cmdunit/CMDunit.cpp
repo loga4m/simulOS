@@ -23,9 +23,7 @@ bool CommandRegistry::registerCommand(std::string key, Command *cmd)
 Command *CommandRegistry::getCommand(std::string key)
 {
     if (hasCommand(key))
-    {
         return commandMap.at(key);
-    }
     return nullptr;
 }
 
@@ -39,9 +37,7 @@ std::vector<std::string> CommandRegistry::getAllCommandNames()
     std::vector<std::string> cmd_names = {};
 
     for (auto key_value : commandMap)
-    {
         cmd_names.push_back(key_value.first);
-    }
 
     return cmd_names;
 }
@@ -65,10 +61,8 @@ int CommandHandler::processCommand(std::string user_input)
 
 std::vector<std::string> CommandHandler::parseCommand(const std::string &user_input)
 {
-    if (user_input.empty())
-    {
-        return {};
-    }
+    if (user_input.empty()) return {};
+
     std::vector<std::string> result{};
     size_t index = 0;
     std::string mover = "";
@@ -77,10 +71,7 @@ std::vector<std::string> CommandHandler::parseCommand(const std::string &user_in
     {
         if (user_input.at(index) == ' ')
         {
-            if (!mover.empty())
-            {
-                result.push_back(mover);
-            }
+            if (!mover.empty()) result.push_back(mover);
             mover.clear();
         }
         else
@@ -90,10 +81,7 @@ std::vector<std::string> CommandHandler::parseCommand(const std::string &user_in
         index++;
     }
 
-    if (!mover.empty())
-    {
-        result.push_back(mover);
-    }
+    if (!mover.empty()) result.push_back(mover);
     /*  ^
      *  |__This handles the case when user_input does not
      *     end with empty space. This results in loop quitting
@@ -104,10 +92,7 @@ std::vector<std::string> CommandHandler::parseCommand(const std::string &user_in
 
 int CommandHandler::executeCommand(std::vector<std::string> command_vec)
 {
-    if (command_vec.empty())
-    {
-        return 0;
-    }
+    if (command_vec.empty()) return 0;
 
     std::string key = command_vec.front();
     command_vec.erase(command_vec.begin());

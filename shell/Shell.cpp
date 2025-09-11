@@ -51,10 +51,7 @@ int Shell::startSession()
 
 int Shell::addHistory(const std::string &user_input)
 {
-    if (user_input.empty())
-    {
-        return 0;
-    }
+    if (user_input.empty()) return 0;
     std::string put_enter = (!getHistory().empty()) ? "\n" : "";
     std::string content = put_enter + "$  " + user_input;
     return history->addWrite(content); // returns integer code
@@ -82,10 +79,7 @@ std::string Shell::getHistory() const
 
 int Shell::changeCurrentDir(DirectoryObject *new_dir)
 {
-    if (!new_dir)
-    {
-        return -1;
-    }
+    if (!new_dir) return -1;
     current_dir = new_dir;
     return 0;
 } // By Hasan Mavlonov, adjusted by Oyatillo Axadjonov
