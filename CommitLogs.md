@@ -250,3 +250,34 @@ Tested with nested objects. Working fine.
 
 ### UPDATE: 11:53 PM
 Removing print debugger :)
+
+
+### Sep 13, 2025, 09:15 AM
+
+I was working on the issue of RM & history. The problem was that after
+rm-ing the shell history file, any command caused double free error.
+
+I don't know why it is called double free, but I have identified that
+the cause was the shell->addHistory(...) call in the CMDunit::process_command
+function. Subsequently, in Shell::addHitory, the system tried to access
+the history variable to get its content via getHistory which accesses history
+pointer with "->" operator.
+As of internals of RM command, it uses FileObject::remove function which
+essentially deletes itself. However, if there is a pointer variable to this
+object, it does not set the pointer to NULL, resulting in a **danging pointer**.
+
+Based on the current knowledge, I believe this is the only case that
+history variable will be corrupted. Thus, I added try-catch block to 
+addHistory function.
+
+It tries to access the content of the object at `history`, and in case of
+any error, it re-creates the history file.
+
+At the same time, does not check whether the `history` variable was
+corrupted by freeing but not setting to NULL or just was simply corrupted.
+
+Again, as I believe RM-ing is the only way for it to be corrupted, I don't need to
+handle it.
+
+
+# ^->**It didn't work.**
